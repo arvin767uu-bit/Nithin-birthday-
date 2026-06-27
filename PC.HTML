@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Gotham's Hero!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            --batman-black: #111111;
+            --batman-yellow: #ffcc00;
+            --gotham-blue: #1c2541;
+            --text-light: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, var(--gotham-blue) 0%, var(--batman-black) 100%);
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: var(--text-light);
+        }
+
+        /* Interactive Bat-Signal Button */
+        .trigger-container {
+            text-align: center;
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+
+        .bat-button {
+            background-color: var(--batman-yellow);
+            color: var(--batman-black);
+            border: none;
+            padding: 20px 40px;
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--batman-yellow);
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .bat-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px var(--batman-yellow), 0 0 10px #fff;
+        }
+
+        .bat-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Hidden Birthday Content Card */
+        .wishes-card {
+            display: none;
+            text-align: center;
+            max-width: 500px;
+            padding: 40px;
+            background: rgba(17, 17, 17, 0.85);
+            border: 3px solid var(--batman-yellow);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .wishes-card.reveal {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .wishes-title {
+            font-family: 'Bangers', cursive;
+            font-size: 3.5rem;
+            color: var(--batman-yellow);
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0px #000;
+            letter-spacing: 1px;
+        }
+
+        .wishes-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+        }
+
+        /* Cute Batman Sticker Styling */
+        .batman-sticker {
+            width: 150px;
+            height: auto;
+            margin: 15px auto 0 auto;
+            display: block;
+            transform: scale(0);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+        }
+
+        .wishes-card.reveal .batman-sticker {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="trigger-container" id="btnContainer">
+        <!-- FIXED: Replaced invalid code inside onclick attribute with activateBatSignal() -->
+        <button class="bat-button" onclick="activateBatSignal()">THE SAVER OF CITY CLICK HERE</button>
+    </div>
+
+    <div class="wishes-card" id="wishesCard">
+        <h1 class="wishes-title">HAPPY BIRTHDAY NITHIN!</h1>
+        <p class="wishes-text">
+           Gotham doesn't just need a hero; it needs to celebrate your journey today. May your year ahead be armed with the unyielding resolve of the Dark Knight, Not all heroes wear capes... but on your birthday, you definitely deserve one!. Keep breaking barriers and ruling from the shadows. Wishing you a day filled with happiness, laughter, and unforgettable memories. Have an absolutely legendary day! And Happy Birthday, Nithin!
+        </p>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" class="batman-sticker relative z-10">
+            <path d="M 50,145 Q 15,185 35,200 Q 100,185 100,200 Q 100,185 165,200 Q 185,185 150,145 M 60,120 Q 45,55 50,35 L 75,50 Q 100,45 125,50 L 150,35 Q 155,55 140,120 Z" fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linejoin="round" stroke-linecap="round" />
+            <path d="M 50,145 Q 15,185 35,200 Q 100,185 100,200 Q 100,185 165,200 Q 185,185 150,145 Z" fill="#1E293B" />
+            <path d="M 65,150 Q 100,170 135,150" stroke="#0F172A" stroke-width="3" fill="none" />
+            <rect x="75" y="130" width="10" height="6" rx="4" fill="#64748B" />
+            <rect x="78" y="172" width="6" height="5" rx="2" fill="#0F172A" />
+            <rect x="104" y="172" width="6" height="5" rx="2" fill="#0F172A" />
+            <path d="M 85,138 Q 100,142 115,138 Q 120,148 100,152 Q 80,148 85,138 Z" fill="#0F172A" />
+            <path d="M 96,134 L 100,139 L 104,134 Z" fill="#0F172A" />
+            <rect x="75" y="15" width="5" height="10" rx="3" fill="#FACC15" />
+            <rect x="94" y="15" width="6" height="15" rx="2" fill="#EAB308" />
+            <path d="M 60,120 Q 45,55 50,35 L 75,50 Q 100,45 125,50 L 150,35 Q 155,55 140,120 Z" fill="#0F172A" />
+            <path d="M 70,102 Q 100,88 130,102 Q 134,124 100,124 Q 66,124 70,102 Z" fill="#FED7AA" />
+            <path d="M 74,84 Q 88,74 92,88 Q 83,93 74,84 Z" fill="#FFFFFF" />
+            <path d="M 126,84 Q 112,74 108,88 Q 117,93 126,84 Z" fill="#FFFFFF" />
+            <circle cx="77" cy="110" r="6" fill="#F87171" opacity="0.6" />
+            <circle cx="123" cy="110" r="6" fill="#F87171" opacity="0.6" />
+            <path d="M 95,114 Q 100,118 105,114" stroke="#0F172A" stroke-width="2.5" fill="none" stroke-linecap="round" />
+        </svg>
+    </div>
+
+    <script>
+        function activateBatSignal() {
+            const btnContainer = document.getElementById('btnContainer');
+            const wishesCard = document.getElementById('wishesCard');
+
+            btnContainer.style.display = 'none';
+
+            var count = 200;
+            var defaults = {
+                origin: { y: 0.6 }
+            };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55, colors: ['#ffcc00', '#111111'] });
+            fire(0.2, { spread: 60, colors: ['#ffcc00', '#ffffff'] });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8, colors: ['#ffcc00', '#1c2541'] });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2, colors: ['#ffcc00', '#111111'] });
+            fire(0.1, { spread: 120, startVelocity: 45, colors: ['#ffcc00'] });
+
+            wishesCard.classList.add('reveal');
+        }
+    </script>
+</body>
+</html>
